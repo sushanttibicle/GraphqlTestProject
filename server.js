@@ -36,7 +36,12 @@ const resolvers = {
       signup: async (parent, args) => {
         const client = await pool.connect();
         try {
-          // In a real-world scenario, you would hash the password and insert into the database
+          
+            const emailCheckResult = await client.query('SELECT email FROM users WHERE email = $1', [args.email]);
+
+        if (emailCheckResult.rows.length > 0) {
+          throw new Error('Email already exists'); // Throw an error if the email is already in use
+        }
           const result = await client.query(
             'INSERT INTO users(username, email, password, id) VALUES($1, $2, $3, $4) RETURNING *',
             [args.username, args.email, args.password, uuidv4()] // Using uuidv4() for generating a unique ID
