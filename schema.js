@@ -20,6 +20,12 @@ const RootQuery = new GraphQLObjectType({
         return 'Hello, GraphQL!';
       },
     },
+    login:{
+        type: GraphQLString,
+        resolve() {
+          return 'Login Success';
+        }, 
+    }
   },
 });
 

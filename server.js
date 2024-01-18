@@ -20,7 +20,8 @@ const typeDefs = gql`
   }
 
   type Query {
-    hello: String
+    hello: String,
+    login:String
   }
 
   type Mutation {
@@ -31,6 +32,7 @@ const typeDefs = gql`
 const resolvers = {
     Query: {
       hello: () => 'Hello, GraphQL!',
+      login:()=>'login success'
     },
     Mutation: {
       signup: async (parent, args) => {
